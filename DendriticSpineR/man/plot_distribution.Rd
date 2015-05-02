@@ -4,7 +4,7 @@
 \alias{plot_distribution}
 \title{Function plots crossed effects}
 \usage{
-plot_distribution(data, var, f1 = "Group", strat = "Animal")
+plot_distribution(data, var, f1 = "Group", strat = "Animal", box = FALSE)
 }
 \arguments{
 \item{data}{data.frame with data}
@@ -14,6 +14,8 @@ plot_distribution(data, var, f1 = "Group", strat = "Animal")
 \item{f1}{first effect (used as fill)}
 
 \item{strat}{stratification (Animal)}
+
+\item{box}{how to present distribution? boxplot or kernel density?}
 }
 \description{
 Function plots densities for given varialbe divided into groups (f1) plotted on different panels (strat)
