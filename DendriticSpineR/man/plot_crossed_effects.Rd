@@ -25,6 +25,7 @@ plot_crossed_effects(data, var, trans = I, inv = I, f1 = "group",
 \item{mixed}{if TRUE a mixed model is applied, if FALSE it's just standard linear regression}
 }
 \description{
-Function creates folder with downloaded subtitles (as .zip file or unzipped .txt or .srt file)
+Function calculates averages and sd's (with the use of fixed or mixed models) and plots them.
+It is assumed that there are two crossed effects.
 }
 
