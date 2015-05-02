@@ -5,7 +5,7 @@
 \title{Function plots crossed effects}
 \usage{
 plot_crossed_effects(data, var, trans = I, inv = I, f1 = "group",
-  f2 = "condition", strat = "Animal")
+  f2 = "condition", strat = "Animal", mixed = TRUE)
 }
 \arguments{
 \item{data}{data.frame with data}
@@ -21,6 +21,8 @@ plot_crossed_effects(data, var, trans = I, inv = I, f1 = "group",
 \item{f2}{second effect}
 
 \item{strat}{stratification (Animal)}
+
+\item{mixed}{if TRUE a mixed model is applied, if FALSE it's just standard linear regression}
 }
 \description{
 Function creates folder with downloaded subtitles (as .zip file or unzipped .txt or .srt file)
