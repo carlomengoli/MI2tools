@@ -16,11 +16,11 @@ plot_distribution <- function(data, var, f1="Group", strat = "Animal", box = FAL
   if (box) {
     data$ng <- factor(paste(data[,f1], data[,strat]))
     data$ng <- reorder(data$ng, data[,var], median, na.rm=TRUE)
+
     ggplot(data, aes_string(x="ng", y=var, fill=f1)) +
       geom_boxplot() + coord_flip() +
       theme(legend.position="top") +
-      facet_wrap(as.formula(paste0("~", strat)))  + ylab("")
-
+      facet_wrap(as.formula(paste0("~", strat)))  + xlab("")
   } else {
     quant <- quantile(data[,var], c(0.001, 0.999))
 
