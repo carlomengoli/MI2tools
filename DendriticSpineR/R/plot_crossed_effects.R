@@ -1,6 +1,7 @@
 #' Function plots crossed effects
 #'
-#' Function creates folder with downloaded subtitles (as .zip file or unzipped .txt or .srt file)
+#' Function calculates averages and sd's (with the use of fixed or mixed models) and plots them.
+#' It is assumed that there are two crossed effects.
 #'
 #' @param data data.frame with data
 #' @param var variable of interest
