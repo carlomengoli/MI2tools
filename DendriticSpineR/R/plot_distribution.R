@@ -17,5 +17,6 @@ plot_distribution <- function(data, var, f1="Group", strat = "Animal") {
   ggplot(data, aes_string(fill=f1, x=var)) +
     geom_density(adjust=1, alpha=0.5) +
     coord_cartesian(xlim=quant) +
-    facet_wrap(as.formula(paste0("~", strat)))
+    facet_wrap(as.formula(paste0("~", strat))) +
+    theme(legend.position="top")
 }
