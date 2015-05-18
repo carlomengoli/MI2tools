@@ -1,3 +1,21 @@
+#' A diffogram for lsmeans
+#'
+#' This function plots a diffogram for least square means calculated
+#' with the lsmeans package.
+#' The diffogram presents results from post hoc test.
+#'
+#' @param lsmodel an object from lsmeans function
+#'
+#' @import lsmeans
+#' 
+#' @examples \dontrun {
+#' model <- lmer(log(length) ~ group + (1|Animal) , data=data)
+#' lsmodel <- lsmeans(model,  pairwise~group, adjust="tukey")
+#' diffogram(lsmodel)
+#' }
+#'
+#' @export
+
 diffogram <- function(lsmodel) {
   # effects
   tmp1 <- confint(lsmodel$lsmeans)
