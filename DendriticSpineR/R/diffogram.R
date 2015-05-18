@@ -36,7 +36,9 @@ diffogram <- function(lsmodel) {
   # the plot
   ggplot(to_plot, aes(x=wsp_x, y=wsp_y)) + 
     geom_hline(data=effects, aes(yintercept=values), lty=2, color="grey") + 
+    geom_text(data=effects, aes(x=spec[1], y=values, label=labels), hjust=0, vjust=-0.3, size=4) + 
     geom_vline(data=effects, aes(xintercept=values), lty=2, color="grey") + 
+    geom_text(data=effects, aes(y=spec[2], x=values, label=labels), hjust=1, vjust=-0.3, size=4, angle=90) + 
     geom_point(size=2) + 
     geom_segment(aes(x=wsp_y + wsp_x_y - wsp_x_y_ci_left/2, 
                      xend=wsp_y + wsp_x_y - wsp_x_y_ci_right/2,
@@ -45,11 +47,11 @@ diffogram <- function(lsmodel) {
                      color=significant,
                      lty=significant)) + 
     geom_abline(intercept=0, slope=1) +
-    xlim(spec) + ylim(spec) +
+    xlim(spec) + ylim(spec) + xlab("") + ylab("") +
     scale_color_manual(values=c("navyblue", "red4")) +
     scale_linetype_manual(values=c(2,1)) +
-    theme(panel.background	= element_rect(fill = "white"))
-  
+    theme(panel.background	= element_rect(fill = "white"),
+          legend.position="bottom")
     
 }
 
