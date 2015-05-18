@@ -12,7 +12,10 @@ diffogram(lsmodel)
 \description{
 This function plots a diffogram for least square means calculated
 with the lsmeans package.
-The diffogram presents results from post hoc test.
+The diffogram presents results from post hoc testing.
+More informations about diffograms:
+,,Interpreting the Differences Among LSMEANS in Generalized Linear Models''
+http://www.mwsug.org/proceedings/2011/dataviz/MWSUG-2011-DG08.pdf
 }
 \examples{
 \dontrun{

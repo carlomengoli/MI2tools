@@ -2,7 +2,10 @@
 #'
 #' This function plots a diffogram for least square means calculated
 #' with the lsmeans package.
-#' The diffogram presents results from post hoc test.
+#' The diffogram presents results from post hoc testing.
+#' More informations about diffograms:
+#' ,,Interpreting the Differences Among LSMEANS in Generalized Linear Models''
+#' http://www.mwsug.org/proceedings/2011/dataviz/MWSUG-2011-DG08.pdf
 #'
 #' @param lsmodel an object from lsmeans function
 #'
@@ -50,13 +53,15 @@ diffogram <- function(lsmodel) {
 
   # ranges
   spec <- range(effects$values) + max(c(abs(to_plot$wsp_x_y_ci_left), abs(to_plot$wsp_x_y_ci_right))) * c(-0.5,0.5)
+  effects$spec1 <- spec[1]
+  effects$spec2 <- spec[2]
 
   # the plot
   ggplot(to_plot, aes(x=wsp_x, y=wsp_y)) +
     geom_hline(data=effects, aes(yintercept=values), lty=3, color="grey") +
-    geom_text(data=effects, aes(x=spec[1], y=values, label=labels), hjust=0, vjust=-0.3, size=4) +
+    geom_text(data=effects, aes(x=spec1, y=values, label=labels), hjust=0, vjust=-0.3, size=4) +
     geom_vline(data=effects, aes(xintercept=values), lty=3, color="grey") +
-    geom_text(data=effects, aes(y=spec[2], x=values, label=labels), hjust=1, vjust=-0.3, size=4, angle=90) +
+    geom_text(data=effects, aes(y=spec2, x=values, label=labels), hjust=1, vjust=-0.3, size=4, angle=90) +
     geom_point(size=2) +
     geom_segment(aes(x=wsp_y + wsp_x_y - wsp_x_y_ci_left/2,
                      xend=wsp_y + wsp_x_y - wsp_x_y_ci_right/2,
