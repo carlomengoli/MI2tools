@@ -11,7 +11,7 @@
 #'
 #' @export
 
-plot_distribution <- function(spines, group, ecdf=TRUE) {
+plot_ecdf <- function(spines, group, ecdf=TRUE) {
   df <- data.frame(spines, group)
   if (ecdf) {
     ggplot(df, aes(x=spines, fill=group, color=group)) +
