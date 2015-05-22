@@ -1,0 +1,11 @@
+Package: tilingAgronomix
+Type: Package
+Title: Toolbox for tiling microarrays e.g. Agronomix
+Version: 1.0
+Date: 2014-02-25
+Author: Przemyslaw Biecek 
+Description: Set of functions for analyses of tiling microarrays
+Maintainer: Przemyslaw Biecek <Przemyslaw.Biecek@gmail.com>
+Depends: R (>= 2.0), RColorBrewer, tilingArray, Starr, seqinr
+License: GPL-3
+Repository: CRAN
