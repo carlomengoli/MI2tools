@@ -5,7 +5,7 @@
 \title{Function plots crossed effects}
 \usage{
 plot_crossed_effects(data, var, trans = I, inv = I, f1 = "group",
-  f2 = "condition", strat = "Animal", mixed = TRUE)
+  f2 = "condition", strat = "Animal", mixed = TRUE, addpoints = FALSE)
 }
 \arguments{
 \item{data}{data.frame with data}
@@ -23,6 +23,8 @@ plot_crossed_effects(data, var, trans = I, inv = I, f1 = "group",
 \item{strat}{stratification (Animal)}
 
 \item{mixed}{if TRUE a mixed model is applied, if FALSE it's just standard linear regression}
+
+\item{addpoints}{if TRUE additional points for each f1/f2/strat group will be added}
 }
 \description{
 Function calculates averages and sd's (with the use of fixed or mixed models) and plots them.
