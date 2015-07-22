@@ -25,7 +25,7 @@ plot_crossed_effects <- function(data, var, trans = I, inv = I, f1="group", f2="
   ndata[,var] <- trans(data[,var])
   
   if (mixed) {
-    form <- as.formula(paste0(var, " ~ ", f1, ":", f2, "-1 +(1|",strat,")"))
+    form <- as.formula(paste0(var, " ~ ", f1, ":", f2, "-1 + (1|",strat,")"))
     ss <- summary(lmer(form, ndata))$coef[,1:2]
     co2 <- data.frame(n = rownames(ss), ss)
   } else {
@@ -46,7 +46,7 @@ plot_crossed_effects <- function(data, var, trans = I, inv = I, f1="group", f2="
     theme_bw() + ylab(var)
   
   if (addpoints) {
-    fdata <- data
+    fdata <- ndata
     if (length(grep(strat, pattern = ":")) > 0) 
       stop("the strat argument cannot contain ':' when ppoints are added")
     fdata$fake_var <- fdata[,var]
@@ -55,7 +55,7 @@ plot_crossed_effects <- function(data, var, trans = I, inv = I, f1="group", f2="
     fdata$fake_strat <- fdata[,strat]
     fpoints <- fdata %>%
       group_by(fake_f1,fake_f2,fake_strat) %>%
-      summarise(meds = mean(fake_var))
+      summarise(meds = inv(mean(fake_var)))
     pl <- pl + 
       geom_point(data=fpoints, aes(x=fake_f1, color=fake_f2, y=meds, ymin=meds, ymax=meds))
   }
