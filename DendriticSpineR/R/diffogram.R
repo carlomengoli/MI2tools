@@ -8,6 +8,8 @@
 #' http://www.mwsug.org/proceedings/2011/dataviz/MWSUG-2011-DG08.pdf
 #'
 #' @param lsmodel an object from lsmeans function
+#' 
+#' @param logt are the reposnce after log transformation?
 #'
 #' @import lsmeans
 #'
@@ -19,7 +21,7 @@
 #'
 #' @export
 
-diffogram <- function(lsmodel) {
+diffogram <- function(lsmodel, logt=FALSE) {
   # effects
   tmp1 <- confint(lsmodel$lsmeans)
   effects <- data.frame(labels = tmp1[,attr(tmp1, "pri.vars")],
@@ -50,23 +52,32 @@ diffogram <- function(lsmodel) {
                         wsp_x_y_ci_right = ci[,"ciR"] - ci[,"values"],
                         significant = ifelse(ci[,"ciL"] * ci[,"ciR"] > 0,
                                              "significant", "non-significant"))
-
+  to_plot$seg_x <- to_plot$wsp_y + to_plot$wsp_x_y - to_plot$wsp_x_y_ci_left/2
+  to_plot$seg_x_end <- to_plot$wsp_y + to_plot$wsp_x_y - to_plot$wsp_x_y_ci_right/2
+  to_plot$seg_y <- to_plot$wsp_y + to_plot$wsp_x_y_ci_left/2
+  to_plot$seg_y_end <- to_plot$wsp_y + to_plot$wsp_x_y_ci_right/2
+  
   # ranges
   spec <- range(effects$values) + max(c(abs(to_plot$wsp_x_y_ci_left), abs(to_plot$wsp_x_y_ci_right))) * c(-0.5,0.5)
   effects$spec1 <- spec[1]
   effects$spec2 <- spec[2]
+  
+  if (logt) {
+    effects[,2:ncol(effects)] <- exp(effects[,2:ncol(effects)]) 
+    to_plot[,3:7] <- exp(to_plot[,3:7]) 
+    to_plot[,9:12] <- exp(to_plot[,9:12]) 
+    spec <- exp(spec)
+  }
 
   # the plot
-  ggplot(to_plot, aes(x=wsp_x, y=wsp_y)) +
+  pl <- ggplot(to_plot, aes(x=wsp_x, y=wsp_y)) +
     geom_hline(data=effects, aes(yintercept=values), lty=3, color="grey") +
     geom_text(data=effects, aes(x=spec1, y=values, label=labels), hjust=0, vjust=-0.3, size=4) +
     geom_vline(data=effects, aes(xintercept=values), lty=3, color="grey") +
     geom_text(data=effects, aes(y=spec2, x=values, label=labels), hjust=1, vjust=-0.3, size=4, angle=90) +
     geom_point(size=2) +
-    geom_segment(aes(x=wsp_y + wsp_x_y - wsp_x_y_ci_left/2,
-                     xend=wsp_y + wsp_x_y - wsp_x_y_ci_right/2,
-                     y=wsp_y  + wsp_x_y_ci_left/2,
-                     yend=wsp_y + wsp_x_y_ci_right/2,
+    geom_segment(data=to_plot, aes(x=seg_x, xend=seg_x_end,
+                     y=seg_y, yend=seg_y_end,
                      color=significant,
                      lty=significant)) +
     geom_abline(intercept=0, slope=1) +
@@ -75,7 +86,11 @@ diffogram <- function(lsmodel) {
     scale_linetype_manual(values=c(2,1)) +
     theme(panel.background	= element_rect(fill = "white"),
           legend.position="bottom")
-
+  if (logt) {
+    pl <- pl + scale_x_log10(limits=spec) + scale_y_log10(limits=spec)
+  }
+  
+  pl
 }
 
 
