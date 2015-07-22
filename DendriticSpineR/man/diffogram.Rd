@@ -4,10 +4,12 @@
 \alias{diffogram}
 \title{A diffogram for lsmeans}
 \usage{
-diffogram(lsmodel)
+diffogram(lsmodel, logt = FALSE)
 }
 \arguments{
 \item{lsmodel}{an object from lsmeans function}
+
+\item{logt}{are the reposnce after log transformation?}
 }
 \description{
 This function plots a diffogram for least square means calculated
