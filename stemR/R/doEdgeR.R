@@ -13,5 +13,6 @@ doEdgeR <- function(counts, group) {
   y <- estimateCommonDisp(y)
   y <- estimateTagwiseDisp(y)
   et <- exactTest(y)
-  et
+  list(counts = y,
+       tests = et)
 }
