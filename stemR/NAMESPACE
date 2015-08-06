@@ -2,4 +2,7 @@
 
 export(doEdgeR)
 export(doFiltering)
+export(plotTopTags)
 import(edgeR)
+import(ggplot2)
+import(tidyr)
