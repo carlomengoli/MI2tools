@@ -20,5 +20,5 @@ plotTopTags <- function(counts, groups) {
   ggplot(topTlong, aes(x=group, y=value, color=group)) +
     geom_boxplot() +
     geom_point(position=position_jitter(0.2,0)) +
-    facet_wrap(~gene, scales = "free_y") + theme_bw()
+    facet_wrap(~gene, scales = "free_y") + theme_bw() + ylab("#cpm")
 }
