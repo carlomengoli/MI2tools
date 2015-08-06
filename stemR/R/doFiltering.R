@@ -6,5 +6,5 @@
 #' @export
 
 doFiltering <- function(counts, avg.min = 1) {
-  countTable[rowMeans(counts) > 1,,drop=FALSE]
+  counts[rowMeans(counts) >= avg.min,,drop=FALSE]
 }
