@@ -1,0 +1,7 @@
+                          Var1 pres Freq
+1       acute myeloid leukemia  hES   23
+2 bladder urothelial carcinoma  hES   29
+3    breast invasive carcinoma  hES  278
+4         colon adenocarcinoma  hES   98
+5          FFPE pilot phase II  hES    3
+6      glioblastoma multiforme  hES   95
